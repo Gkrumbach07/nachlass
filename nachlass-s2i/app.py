@@ -34,8 +34,6 @@ def predict():
       if len(args.columns) == 1 and len(args.values) > 1:
           # convert to series
           args = args.squeeze()
-      else:
-          args = [args.squeeze()]
     else:
       args = cPloads(base64.b64decode(request.form['args']))
     try:
