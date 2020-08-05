@@ -1,5 +1,5 @@
 from flask import Flask, redirect, request, url_for
-from flask_cors import cross_origin
+from flask_cors import CORS
 from prometheus_client import make_wsgi_app, Summary, Counter, Histogram
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
@@ -13,6 +13,7 @@ import os
 import pandas as pd
 
 app = Flask(__name__)
+CORS(app)
 
 METRICS_PREFIX = os.getenv("S2I_APP_METRICS_PREFIX", "nachlass")
 
@@ -25,7 +26,6 @@ def index():
   return "Make a prediction by POSTing to /predict"
 
 @app.route('/predict', methods=['POST'])
-@cross_origin
 @PREDICTION_TIME.time()
 def predict():
     import json
