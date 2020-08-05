@@ -7,8 +7,9 @@ echo NOTEBOOK LIST IS "${S2I_SOURCE_NOTEBOOK_LIST}"
 echo EXTRA REQUIREMENTS ARE:
 cat /opt/sms/requirements.txt
 
-virtualenv-3 app 
+virtualenv app
 app/bin/pip install "cloudpickle == 0.5.3" "flask"
+app/bin/pip install -U flask-cors
 
 process_each_first() {
     local IFS=","
